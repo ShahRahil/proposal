@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-color: pink;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            color: red;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .buttons {
+            position: relative;
+            margin-top: 20px;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        #yes {
+            background-color: green;
+            color: white;
+        }
+        #yes:hover {
+            transform: scale(1.1);
+            background-color: darkgreen;
+        }
+        #no {
+            background-color: red;
+            color: white;
+            position: absolute;
+        }
+        #message {
+            display: none;
+            font-size: 24px;
+            color: darkred;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        #proposal-image {
+            display: none;
+            margin-top: 20px;
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            animation: popIn 1s ease-in-out;
+        }
+        .crying-minion {
+            display: none;
+            margin-top: 20px;
+            width: 200px;
+            height: auto;
+        }
+        .flower {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url('https://www.pngmart.com/files/1/Rose-PNG-HD.png');
+            background-size: cover;
+            opacity: 0.8;
+            animation: fall 4s linear infinite;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes fall {
+            from { transform: translateY(-100vh) rotate(0deg); }
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Will You be my Rah For Life?</h1>
+    <div class="buttons">
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+    </div>
+    <p id="message">Yay! I can't wait to spend forever with you ❤️</p>
+    <img id="proposal-image" src="website.jpg" alt="Proposal">
+    <img id="crying-minion" class="crying-minion" src="https://media.giphy.com/media/3o6gDWzmAzrpi5DQU8/giphy.gif" alt="Crying Minion">
+    
+    <script>
+        const noButton = document.getElementById("no");
+        const yesButton = document.getElementById("yes");
+        const message = document.getElementById("message");
+        const proposalImage = document.getElementById("proposal-image");
+        const cryingMinion = document.getElementById("crying-minion");
+
+        noButton.addEventListener("mouseover", function() {
+            const x = Math.random() * (200 - 10) + 10; // Reduce movement range
+            const y = Math.random() * (200 - 10) + 10;
+            const rect = noButton.getBoundingClientRect();
+            noButton.style.left = `${rect.left + x}px`;
+            noButton.style.top = `${rect.top + y}px`;
+        });
+
+        noButton.addEventListener("click", function() {
+            const x = Math.random() * (200 - 10) + 10;
+            const y = Math.random() * (200 - 10) + 10;
+            const rect = noButton.getBoundingClientRect();
+            noButton.style.left = `${rect.left + x}px`;
+            noButton.style.top = `${rect.top + y}px`;
+            cryingMinion.style.display = "block";
+        });
+
+        yesButton.addEventListener("click", function() {
+            message.style.display = "block";
+            message.style.animation = "fadeIn 2s ease-in-out";
+            proposalImage.style.display = "block";
+            proposalImage.style.animation = "popIn 1s ease-in-out";
+            noButton.style.display = "none";
+            startFlowerShower();
+        });
+
+        function startFlowerShower() {
+            for (let i = 0; i < 30; i++) {
+                let flower = document.createElement("div");
+                flower.classList.add("flower");
+                flower.style.left = Math.random() * window.innerWidth + "px";
+                flower.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                document.body.appendChild(flower);
+                setTimeout(() => { flower.remove(); }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>
